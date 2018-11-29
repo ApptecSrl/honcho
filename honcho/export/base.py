@@ -1,5 +1,6 @@
 from __future__ import print_function
 
+import os
 import re
 import sys
 
@@ -62,6 +63,13 @@ def dashrepl(value):
     return re.sub(patt, '-', value)
 
 
+def expandvars(value):
+    """
+    Evaluate environment variable
+    """
+    return os.path.expandvars(value)
+
+
 def percentescape(value):
     """
     Double any % signs.
@@ -74,4 +82,5 @@ def _default_template_env(loader):
     env.filters['shellquote'] = shellquote
     env.filters['dashrepl'] = dashrepl
     env.filters['percentescape'] = percentescape
+    env.filters['expandvars'] = expandvars
     return env
